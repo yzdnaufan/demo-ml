@@ -6,7 +6,7 @@ from classes.CountingClass import Chickount
 from secret import firestore_admin
 
 cred = credentials.Certificate(firestore_admin)
-app = firebase_admin.initialize_app()
+app = firebase_admin.initialize_app(credential=cred)
 
 def UploadDataToFirestore(data,idRef, collection_name = 'yolo'):
     db = firestore.client()
