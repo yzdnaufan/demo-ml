@@ -1,11 +1,16 @@
-from firebase_admin import firestore
-from firebase_admin import credentials
+import json
+
 import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 
 from classes.CountingClass import Chickount
 from secret import firestore_admin
 
-cred = credentials.Certificate(firestore_admin)
+svc_account = json.loads(firestore_admin)
+
+cred = credentials.Certificate(svc_account)
+
 app = firebase_admin.initialize_app(credential=cred)
 
 def UploadDataToFirestore(data,idRef, collection_name = 'yolo'):
