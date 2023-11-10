@@ -35,9 +35,8 @@ def access_secret_version(
     return payload
 
 # Secret
-api_key = access_secret_version("930816053049", "ULTRALYTICS_SECRET", "1")
-
 url = "https://api.ultralytics.com/v1/predict/ipyo4cywDcA7LgB4Zy1n"
+api_key = access_secret_version("930816053049", "ULTRALYTICS_SECRET", "1")
 headers = {"x-api-key": api_key}
-data = {"size": 640, "confidence": 0.25, "iou": 0.45}
 
+data = {"size": 640, "confidence": 0.25, "iou": 0.45}

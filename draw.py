@@ -50,7 +50,7 @@ def draw_boxes(bytes_image : bytes, result):
 
 def draw_from_firestore(id):
     # Load image
-    img_enc = GetImageFromFirestore(idRef=id).split(',')[1]
+    img_enc = GetImageFromFirestore(idRef=id)
     img_decoded = io.BytesIO(base64.b64decode(img_enc))
 
     response = requests.post(u, headers=h, data=d, files={"image": img_decoded})
