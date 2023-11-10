@@ -17,17 +17,17 @@ def draw_boxes(bytes_image : bytes, result):
         # Get the bounding box coordinates
 
 
-        x, y, w, h = obj['box'].values()
+        x, xx, y, yy = obj['box'].values()
 
-        x1 = int(x) - int(w/2) if int(x) - int(w/2) > 0 else 0
-        y1 = int(y) - int(h/2) if int(y) - int(h/2) > 0 else 0
+        # x1 = int(x) - int(w/2) if int(x) - int(w/2) > 0 else 0
+        # y1 = int(y) - int(h/2) if int(y) - int(h/2) > 0 else 0
 
-        x2 = int(x) + int(w/2) if int(x) + int(w/2) < width else width
-        y2 = int(y) + int(h/2) if int(y) + int(h/2) < height else height
+        # x2 = int(x) + int(w/2) if int(x) + int(w/2) < width else width
+        # y2 = int(y) + int(h/2) if int(y) + int(h/2) < height else height
 
         # Draw the bounding box
         # cv2.rectangle(img_cv,(int(x),int(y)),(int(w), int(h)),  lineType=cv2.LINE_AA, color=(0, 255, 0), thickness=2)
-        cv2.rectangle(img_cv,(x1,y1),(x1 + x2, y2),  lineType=cv2.LINE_AA, color=(0, 255, 0), thickness=2)
+        cv2.rectangle(img_cv,(int(x),int(y)),(int(xx), int(yy)),  lineType=cv2.LINE_AA, color=(0, 255, 0), thickness=2)
 
         # Optionally, add a label
         # label = obj['label']
