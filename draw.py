@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 
 from firestore import GetImageFromFirestore
-from main import url as u, headers as h, data as d
+from secret import url as u, headers as h, data as d
 
 def draw_boxes(bytes_image : bytes, result):
 

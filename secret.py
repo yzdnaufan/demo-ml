@@ -2,6 +2,7 @@
 # Import the Secret Manager client library.
 from google.cloud import secretmanager
 
+
 def access_secret_version(
     project_id: str, secret_id: str, version_id: str
 ) -> secretmanager.AccessSecretVersionResponse:
@@ -32,3 +33,11 @@ def access_secret_version(
     # snippet is showing how to access the secret material.
     payload = response.payload.data.decode("UTF-8")
     return payload
+
+# Secret
+api_key = access_secret_version("930816053049", "ULTRALYTICS_SECRET", "1")
+
+url = "https://api.ultralytics.com/v1/predict/ipyo4cywDcA7LgB4Zy1n"
+headers = {"x-api-key": api_key}
+data = {"size": 640, "confidence": 0.25, "iou": 0.45}
+

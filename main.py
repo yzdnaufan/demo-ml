@@ -8,7 +8,7 @@ import requests
 
 from draw import draw_boxes, draw_from_firestore
 from firestore import UploadDataToFirestore
-from secret import access_secret_version
+from secret import url, headers, data
 
 app = FastAPI()
 
@@ -24,13 +24,6 @@ app.add_middleware(
 
 class Data(BaseModel):
     image: str
-
-# Secret
-api_key = access_secret_version("930816053049", "ULTRALYTICS_SECRET", "1")
-
-url = "https://api.ultralytics.com/v1/predict/ipyo4cywDcA7LgB4Zy1n"
-headers = {"x-api-key": api_key}
-data = {"size": 640, "confidence": 0.25, "iou": 0.45}
 
 # GET request
 
