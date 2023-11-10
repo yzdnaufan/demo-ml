@@ -15,7 +15,10 @@ grpcio-status==1.59.2
 gunicorn==21.2.0
 h11==0.14.0
 idna==3.4
+numpy==1.26.1
+opencv-python==4.8.1.78
 packaging==23.2
+Pillow==10.1.0
 proto-plus==1.22.3
 protobuf==4.25.0
 pyasn1==0.5.0
