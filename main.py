@@ -2,15 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from google.cloud import secretmanager
-
-import json
 import base64
 import requests
-import PIL.Image as Image
 import io
 
-from img import img_64
 from draw import draw_boxes
 from secret import access_secret_version
 
