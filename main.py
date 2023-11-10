@@ -12,6 +12,7 @@ import io
 
 from img import img_64
 from draw import draw_boxes
+from secret import access_secret_version
 
 app = FastAPI()
 
@@ -49,11 +50,8 @@ async def receive_data( data: Data):
     count = 0
     result_b64 = "base64 image"
 
-    # Create the Secret Manager client.
-    client = secretmanager.SecretManagerServiceClient()
-
-    # Run inference on an image
-    api_key = client.access_secret_version(request={"name": "ULTRALYTICS_SECRET"})
+    # Secret
+    api_key = access_secret_version("930816053049", "ULTRALYTICS_SECRET", "1")
 
     url = "https://api.ultralytics.com/v1/predict/ipyo4cywDcA7LgB4Zy1n"
     headers = {"x-api-key": api_key}
