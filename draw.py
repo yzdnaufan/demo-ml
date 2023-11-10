@@ -13,7 +13,7 @@ def draw_boxes(bytes_image : bytes, result):
     height, width, _ = img_cv.shape
 
     # Iterate over the detected objects
-    for obj in result['data'][0:2]:
+    for obj in result['data']:
         # Get the bounding box coordinates
 
 
