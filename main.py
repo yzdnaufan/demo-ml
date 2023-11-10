@@ -3,10 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 import base64
-import requests
 import io
+import requests
 
-from draw import draw_boxes
+from draw import draw_boxes, draw_from_firestore
+from firestore import UploadDataToFirestore
 from secret import access_secret_version
 
 app = FastAPI()
@@ -24,11 +25,30 @@ app.add_middleware(
 class Data(BaseModel):
     image: str
 
+# Secret
+api_key = access_secret_version("930816053049", "ULTRALYTICS_SECRET", "1")
+
+url = "https://api.ultralytics.com/v1/predict/ipyo4cywDcA7LgB4Zy1n"
+headers = {"x-api-key": api_key}
+data = {"size": 640, "confidence": 0.25, "iou": 0.45}
+
 # GET request
 
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+@app.get("/detect/{image_id}")
+async def root(image_id: str):
+
+    # Get data['image', 'count']
+    data = draw_from_firestore(image_id)
+
+    # Upload data to firestore
+    r = UploadDataToFirestore(data, image_id)
+
+    return {"message": "success",
+            "id": r}
 
 
 # POST request
@@ -44,14 +64,6 @@ async def receive_data( data: Data):
     # 2. Process the data
     count = 0
     result_b64 = "base64 image"
-
-    # Secret
-    api_key = access_secret_version("930816053049", "ULTRALYTICS_SECRET", "1")
-
-    url = "https://api.ultralytics.com/v1/predict/ipyo4cywDcA7LgB4Zy1n"
-    headers = {"x-api-key": api_key}
-
-    data = {"size": 640, "confidence": 0.25, "iou": 0.45}
 
     # with open("path/to/image.jpg", "rb") as f:
     #     re = 1       
